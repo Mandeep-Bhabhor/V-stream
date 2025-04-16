@@ -1,4 +1,4 @@
-<x-layouts>
+<x-user.layouts>
     @if(session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -49,4 +49,4 @@
             </div>
         </div>
     </div>
-</x-layouts>
+</x-user.layouts>

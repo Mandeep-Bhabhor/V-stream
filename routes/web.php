@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CreatorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,3 +17,12 @@ Route::get('/register', [UserController::class, 'register'])->name('rewgister');
 
 Route::post('/adduser', [UserController::class, 'adduser'])->name('adduser');
 Route::post('/ulogin', [UserController::class, 'ulogin'])->name('ulogin');
+
+Route::get('/adminview/dashboard', [AdminController::class, 'admindash'])->name('admindash');
+Route::get('/creatorview/dashboard', [CreatorController::class, 'creatordash'])->name('creatordash');
+
+
+
+Route::get('/creator/upload', [CreatorController::class, 'upload'])->name('upload');
+
+Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('creator.videos.store');

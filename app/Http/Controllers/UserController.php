@@ -101,7 +101,10 @@ class UserController extends Controller
              if ($user->usertype === 'viewer') {  
                  return redirect('/');
              } else if ($user->usertype === 'admin') {
-                 return "admin/dashboard";
+                 return redirect('/adminview/dashboard');
+             }
+             else if ($user->usertype === 'creator') {
+                 return redirect('/creatorview/dashboard');
              }
          } else {
              // Redirect back with an error message
