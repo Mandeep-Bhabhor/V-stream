@@ -5,9 +5,19 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\Video;
+//use App\Http\Controllers\File;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
+
+
+    public function home()
+    {
+        $videoFiles = File::files(public_path('uploads/video'));
+        return view('welcome', compact('videoFiles'));
+    }
     public function login(Request $request)
     {
         // Handle the login logic here

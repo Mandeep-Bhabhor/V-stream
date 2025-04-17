@@ -5,9 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CreatorController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [UserController::class, 'home'])->name('home');
+
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'ulogout'])->name('ulogout');

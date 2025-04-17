@@ -157,7 +157,7 @@
               <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
             </ul>
             @else
-            <a class="btn btn-outline-light ms-3" href="/login">Login</a>
+            <a class="btn btn-light ms-3" href="/login">Login</a>
             <a class="btn btn-success ms-2" href="/register">Sign Up</a>
             @endif
           </div>
