@@ -47,14 +47,16 @@ class CreatorController extends Controller
         }
     
         // Example conditions
-        if ($details['width'] < 640 || $details['height'] < 480) {
+        if ($details['height'] < 240) {
             unlink($videoPath);
-            return back()->withErrors(['video' => 'Video resolution must be at least 640x480.'])->withInput();
+            return back()->withErrors(['video' => 'Video resolution must be at least 240p.'])->withInput();
         }
+        
        
         echo $details['label'];
        Video::create([
             'title' => $validated['title'],
+            'video'=> $videoPath,
             'resolution' => $details['label'],
             'uploader_id' => Auth::id(), // Assuming the user is logged in
             'description' => $validated['description'],
