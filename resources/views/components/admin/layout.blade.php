@@ -125,6 +125,7 @@
             <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/users">Users</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/videos">Videos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/encode">Encode</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/categories">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/reports">Reports</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/settings">Settings</a></li>

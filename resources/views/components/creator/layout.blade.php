@@ -101,7 +101,7 @@
 
     @media (max-width: 768px) {
       .navbar {
-        padding: 1rem;
+      padding: 1rem;
       }
 
       .navbar-brand {

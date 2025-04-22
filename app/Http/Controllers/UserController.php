@@ -16,7 +16,8 @@ class UserController extends Controller
     public function home()
     {
         $videoFiles = File::files(public_path('uploads/video'));
-        return view('welcome', compact('videoFiles'));
+        $videos = Video::all();
+        return view('welcome', compact('videoFiles', 'videos'));
     }
     public function login(Request $request)
     {

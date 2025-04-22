@@ -35,6 +35,7 @@ class CreatorController extends Controller
         $request->file('video')->move(public_path($path), $filename);
     
         $videoPath = public_path($path . $filename);
+        
     
         // Get resolution and duration
         $details = $this->getVideoResolutionAndDuration($videoPath);
@@ -56,7 +57,7 @@ class CreatorController extends Controller
         echo $details['label'];
        Video::create([
             'title' => $validated['title'],
-            'video'=> $videoPath,
+            'video'=> $path ? $path . $filename : null,
             'resolution' => $details['label'],
             'uploader_id' => Auth::id(), // Assuming the user is logged in
             'description' => $validated['description'],
@@ -73,7 +74,7 @@ class CreatorController extends Controller
 
     private function getVideoResolutionAndDuration($videoPath)
 {
-    $ffprobePath = 'C:/Users/Student/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/bin/ffprobe.exe'; // Full path to ffprobe
+    $ffprobePath = 'C:/Users/mande/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/bin/ffprobe.exe'; // Full path to ffprobe
     
     // Command to get both resolution (width, height) and duration
     $command = "$ffprobePath -v error -select_streams v:0 -show_entries stream=width,height,duration -of csv=p=0:s=x " . escapeshellarg($videoPath);

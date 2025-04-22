@@ -26,3 +26,9 @@ Route::get('/creatorview/dashboard', [CreatorController::class, 'creatordash'])-
 Route::get('/creator/upload', [CreatorController::class, 'upload'])->name('upload');
 
 Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('creator.videos.store');
+
+
+
+///admin
+
+Route::get('/admin/encode', [AdminController::class, 'encode'])->name('admin.encode');
