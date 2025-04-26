@@ -31,4 +31,9 @@ Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('cr
 
 ///admin
 
-Route::get('/admin/encode', [AdminController::class, 'encode'])->name('admin.encode');
+Route::get('/admin/encode', [AdminController::class, 'encode'])->name('admin.encodeview');
+
+Route::post('/admin/video/{id}/encode', [AdminController::class, 'encodevideo'])->name('admin.encode');
+
+
+//Route::post('/admin/video/{id}/encode', [VideoController::class, 'encode'])->name('admin.encode');
