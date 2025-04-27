@@ -104,7 +104,50 @@ class CreatorController extends Controller
     return null;
 }
 
+    public function myvideos()
+    {
+        $videos = Video::where('uploader_id', Auth::id())->get();
+        return view('creatorview.myvideos', compact('videos'));
+    }
     
+    public function delete($id)
+{
+    $video = Video::find($id);
+
+    if ($video) {
+        $videoPath = public_path($video->video);
+
+        // Delete original video
+        if (file_exists($videoPath)) {
+            unlink($videoPath);
+        }
+
+        // Delete encoded folder
+        $filename = pathinfo($videoPath, PATHINFO_FILENAME);
+        $encodedFolder = public_path("uploads/encoded/{$filename}");
+
+        if (is_dir($encodedFolder)) {
+            foreach (glob($encodedFolder . '/*') as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                } elseif (is_dir($file)) {
+                    foreach (glob($file . '/*') as $subfile) {
+                        unlink($subfile);
+                    }
+                    rmdir($file);
+                }
+            }
+            rmdir($encodedFolder);
+        }
+
+        $video->delete();
+
+        return redirect()->back()->with('success', 'Video deleted successfully!');
+    }
+
+    return redirect()->back()->with('error', 'Video not found.');
+}
+
     
 
     

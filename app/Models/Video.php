@@ -20,7 +20,16 @@ class Video extends Model
       'uploader_id',
       'description',
       'duration',
+      'status', // 'pending', 'approved', 'rejected'
       
         ];
+
+        // app/Models/Video.php
+
+public function uploader()
+{
+    return $this->belongsTo(User::class, 'uploader_id');
+}
+
 
 }

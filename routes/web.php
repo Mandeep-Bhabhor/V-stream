@@ -37,3 +37,9 @@ Route::post('/admin/video/{id}/encode', [AdminController::class, 'encodevideo'])
 
 
 //Route::post('/admin/video/{id}/encode', [VideoController::class, 'encode'])->name('admin.encode');
+
+
+Route::get('/creator/videos', [CreatorController::class, 'myvideos'])->name('creator.myvideos');
+
+Route::get('{id}/deletevideo', [CreatorController::class, 'delete']);
+

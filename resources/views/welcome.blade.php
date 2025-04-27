@@ -8,27 +8,39 @@
             @foreach ($videos as $video)
                 @php
                     $filename = pathinfo($video->video, PATHINFO_FILENAME);
-                    $hlsPath = $filename . '/master.m3u8';
-                    $hlsUrl = 'http://192.168.131.214:8080/' . $hlsPath;
+                    $hlsPath = '/uploads/encoded/' . $filename . '/master.m3u8'; // <- updated path (no public, no IP)
                 @endphp
 
                 <div class="col">
                     <div class="card h-100 shadow-sm rounded-4 border-0">
-                        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                            <video id="video-{{ $video->id }}" controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></video>
+                        <div
+                            style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                            <video id="video-{{ $video->id }}" controls
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></video>
                         </div>
 
                         <div class="card-body">
                             <h5 class="card-title">{{ $filename }}</h5>
+                            <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>
+
+
+                            {{-- Like Button --}}
+                            <div class="flex items-center gap-2 mt-4">
+                                <button onclick="likeVideo({{ $video->id }})"
+                                    class="btn btn-sm btn-outline-primary rounded-pill">
+                                    👍 Like
+                                </button>
+                                <span id="like-count-{{ $video->id }}" class="text-sm text-muted">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         var video = document.getElementById('video-{{ $video->id }}');
-                        var videoSrc = "{{ $hlsUrl }}";
+                        var videoSrc = "{{ $hlsPath }}"; // <- use updated URL
                         var qualitySelectContainer = document.getElementById('quality-select-{{ $video->id }}');
 
                         if (Hls.isSupported()) {
@@ -36,7 +48,7 @@
                             hls.loadSource(videoSrc);
                             hls.attachMedia(video);
 
-                            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            hls.on(Hls.Events.MANIFEST_PARSED, function() {
                                 var qualities = hls.levels.map((level, index) => ({
                                     label: level.height + 'p',
                                     index: index
@@ -53,12 +65,12 @@
 
                                 qualities.forEach(q => {
                                     var option = document.createElement('option');
-                                    option.value = q.index; 
+                                    option.value = q.index;
                                     option.textContent = q.label;
                                     select.appendChild(option);
                                 });
 
-                                select.addEventListener('change', function () {
+                                select.addEventListener('change', function() {
                                     var selectedLevel = parseInt(this.value);
                                     hls.currentLevel = selectedLevel;
                                 });
@@ -72,8 +84,16 @@
                 </script>
             @endforeach
         </div>
+        <script>
+            function likeVideo(videoId) {
+                var countSpan = document.getElementById('like-count-' + videoId);
+                var currentCount = parseInt(countSpan.textContent);
+                countSpan.textContent = currentCount + 1;
+            }
+        </script>
+        
     </div>
 
-    {{-- Include HLS.js --}}
+    {{-- Include HLS.js once --}}
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </x-user.layouts>
