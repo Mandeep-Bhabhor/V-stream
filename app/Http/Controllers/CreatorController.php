@@ -74,7 +74,8 @@ class CreatorController extends Controller
 
     private function getVideoResolutionAndDuration($videoPath)
 {
-    $ffprobePath = 'C:/Users/mande/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/bin/ffprobe.exe'; // Full path to ffprobe
+  //  $ffprobePath = 'C:/Users/mande/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/bin/ffprobe.exe'; // Full path to ffprobe
+  $ffprobePath = 'C:/Users/Student/ffmpeg-2025-04-14-git-3b2a9410ef-full_build/bin/ffprobe.exe'; // Full path to ffprobe
     
     // Command to get both resolution (width, height) and duration
     $command = "$ffprobePath -v error -select_streams v:0 -show_entries stream=width,height,duration -of csv=p=0:s=x " . escapeshellarg($videoPath);
