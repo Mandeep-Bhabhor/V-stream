@@ -37,10 +37,12 @@
                                     @csrf
                                 </form>
                             
-                                <button onclick="submitLike({{ $video->id }})"
+                                <button onclick="toggleLike({{ $video->id }})"
+                                    id="like-button-{{ $video->id }}"
                                     class="btn btn-sm btn-outline-primary rounded-pill">
                                     👍 Like
                                 </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -94,10 +96,36 @@
             @endforeach
         </div>
         <script>
-            function submitLike(videoId) {
-                document.getElementById('like-form-' + videoId).submit();
+            function toggleLike(videoId) {
+                fetch(`/toggle-like/${videoId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const btn = document.getElementById('like-button-' + videoId);
+                    if (data.liked) {
+                        btn.classList.remove('btn-outline-primary');
+                        btn.classList.add('btn-primary');
+                        btn.innerHTML = '👍 Liked';
+                    } else {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-primary');
+                        btn.innerHTML = '👍 Like';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('You must login first to like.');
+                    window.location.href = '/login';
+                });
             }
         </script>
+        
         
     </div>
 

@@ -10,22 +10,30 @@ use App\Models\Video;
 class LikeController extends Controller
 {
     //
-    public function like($videoId)
+    public function toggle($videoId)
     {
         if (!Auth::check()) {
-            // ❌ User is not logged in
-            return redirect()->route('login')->with('message', 'Please login first to like videos.');
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         $user = Auth::user();
 
-        // ✅ Create a new like
-        Like::create([
-            'user_id' => $user->id,
-            'video_id' => $videoId,
-        ]);
+        $like = Like::where('user_id', $user->id)
+                    ->where('video_id', $videoId)
+                    ->first();
 
-        return redirect()->back()->with('success', 'Video liked successfully!');
+        if ($like) {
+            // User already liked, so unlike
+            $like->delete();
+            return response()->json(['liked' => false]);
+        } else {
+            // User has not liked yet, so like
+            Like::create([
+                'user_id' => $user->id,
+                'video_id' => $videoId,
+            ]);
+            return response()->json(['liked' => true]);
+        }
     }
 
 

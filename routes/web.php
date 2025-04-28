@@ -61,5 +61,5 @@ Route::middleware([CreatorMiddleware::class])->group(function () {
 
 
 
-Route::post('/like/{video}', [LikeController::class, 'like'])->name('like.video');
+Route::post('/toggle-like/{video}', [LikeController::class, 'toggle'])->name('like.video');
 Route::get('/trending', [LikeController::class, 'likedVideos'])->name('liked.videos');
