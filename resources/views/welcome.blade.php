@@ -1,4 +1,10 @@
 <x-user.layouts>
+    @if (session('unauthorized'))
+    <div class="alert alert-danger my-2">
+        {{ session('unauthorized') }}
+    </div>
+@endif
+
     <h1 class="text-center my-4">Welcome to the Laravel Application</h1>
 
     <div class="container">
@@ -27,11 +33,14 @@
 
                             {{-- Like Button --}}
                             <div class="flex items-center gap-2 mt-4">
-                                <button onclick="likeVideo({{ $video->id }})"
+                                <form id="like-form-{{ $video->id }}" action="{{ route('like.video', $video->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            
+                                <button onclick="submitLike({{ $video->id }})"
                                     class="btn btn-sm btn-outline-primary rounded-pill">
                                     👍 Like
                                 </button>
-                                <span id="like-count-{{ $video->id }}" class="text-sm text-muted">0</span>
                             </div>
                         </div>
                     </div>
@@ -85,10 +94,8 @@
             @endforeach
         </div>
         <script>
-            function likeVideo(videoId) {
-                var countSpan = document.getElementById('like-count-' + videoId);
-                var currentCount = parseInt(countSpan.textContent);
-                countSpan.textContent = currentCount + 1;
+            function submitLike(videoId) {
+                document.getElementById('like-form-' + videoId).submit();
             }
         </script>
         

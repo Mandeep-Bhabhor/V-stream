@@ -20,5 +20,11 @@ class User extends Authenticatable
       'role',
         ];
 
+
+        public function like()
+{
+    return $this->hasMany(\App\Models\Like::class);
+}
+
     // Add your other properties and methods here
 }

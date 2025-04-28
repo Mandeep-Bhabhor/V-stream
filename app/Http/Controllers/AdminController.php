@@ -14,8 +14,9 @@ class AdminController extends Controller
 
     public function encode()
     {
-        $videos = Video::all();
+        $videos = Video::where('status', 'pending')->get();
         return view('adminview.encode', compact('videos'));
+        
     }
 
     public function encodevideo(Request $request)
@@ -72,7 +73,11 @@ class AdminController extends Controller
             $relativePath = "{$label}/index.m3u8";
             $playlistEntries .= "#EXT-X-STREAM-INF:BANDWIDTH={$bandwidth},RESOLUTION={$width}x{$height}\n{$relativePath}\n";
         }
-    
+     
+
+        $video->status = 'encoded';
+        $video->save(); // don't forget to save it to database
+        
         // Save master playlist
         $masterPlaylist = "#EXTM3U\n{$playlistEntries}";
         file_put_contents("{$outputDir}/master.m3u8", $masterPlaylist);

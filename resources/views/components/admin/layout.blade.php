@@ -122,7 +122,7 @@
 
         <div class="collapse navbar-collapse" id="adminNavbar">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/adminview/dashboard">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/users">Users</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/videos">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/encode">Encode</a></li>
