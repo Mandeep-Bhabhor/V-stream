@@ -30,6 +30,10 @@ public function uploader()
 {
     return $this->belongsTo(User::class, 'uploader_id');
 }
+public function likes()
+{
+    return $this->hasMany(Like::class);
+}
 
 
 }

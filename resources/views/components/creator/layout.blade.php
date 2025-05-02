@@ -133,11 +133,11 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/creator/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/creatorview/dashboard">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="/creator/videos">My Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="/creator/upload">Upload</a></li>
-            <li class="nav-item"><a class="nav-link" href="/creator/analytics">Analytics</a></li>
-            <li class="nav-item"><a class="nav-link" href="/creator/settings">Settings</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="/creator/analytics">Analytics</a></li>
+            <li class="nav-item"><a class="nav-link" href="/creator/settings">Settings</a></li> --}}
           </ul>
 
           <!-- Creator Menu -->

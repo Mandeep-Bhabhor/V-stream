@@ -12,4 +12,12 @@ class Like extends Model
      'user_id',
      'video_id'
         ];
+
+
+
+        public function video()
+{
+    return $this->belongsTo(Video::class);
+}
+
 }

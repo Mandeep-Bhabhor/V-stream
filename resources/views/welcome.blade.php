@@ -1,9 +1,9 @@
 <x-user.layouts>
     @if (session('unauthorized'))
-    <div class="alert alert-danger my-2">
-        {{ session('unauthorized') }}
-    </div>
-@endif
+        <div class="alert alert-danger my-2">
+            {{ session('unauthorized') }}
+        </div>
+    @endif
 
     <h1 class="text-center my-4">Welcome to the Laravel Application</h1>
 
@@ -14,7 +14,7 @@
             @foreach ($videos as $video)
                 @php
                     $filename = pathinfo($video->video, PATHINFO_FILENAME);
-                    $hlsPath = '/uploads/encoded/' . $filename . '/master.m3u8'; // <- updated path (no public, no IP)
+                    $hlsPath = '/uploads/encoded/' . $filename . '/master.m3u8';
                 @endphp
 
                 <div class="col">
@@ -30,28 +30,26 @@
                             <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>
 
-
-                            {{-- Like Button --}}
                             <div class="flex items-center gap-2 mt-4">
                                 <form id="like-form-{{ $video->id }}" action="{{ route('like.video', $video->id) }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            
+
                                 <button onclick="toggleLike({{ $video->id }})"
                                     id="like-button-{{ $video->id }}"
                                     class="btn btn-sm btn-outline-primary rounded-pill">
                                     👍 Like
                                 </button>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
 
+                {{-- Per-video Script --}}
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         var video = document.getElementById('video-{{ $video->id }}');
-                        var videoSrc = "{{ $hlsPath }}"; // <- use updated URL
+                        var videoSrc = "{{ $hlsPath }}";
                         var qualitySelectContainer = document.getElementById('quality-select-{{ $video->id }}');
 
                         if (Hls.isSupported()) {
@@ -59,7 +57,7 @@
                             hls.loadSource(videoSrc);
                             hls.attachMedia(video);
 
-                            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                            hls.on(Hls.Events.MANIFEST_PARSED, function () {
                                 var qualities = hls.levels.map((level, index) => ({
                                     label: level.height + 'p',
                                     index: index
@@ -68,7 +66,6 @@
                                 var select = document.createElement('select');
                                 select.classList.add('form-select');
 
-                                // Auto option
                                 var autoOption = document.createElement('option');
                                 autoOption.value = -1;
                                 autoOption.textContent = 'Auto';
@@ -81,9 +78,8 @@
                                     select.appendChild(option);
                                 });
 
-                                select.addEventListener('change', function() {
-                                    var selectedLevel = parseInt(this.value);
-                                    hls.currentLevel = selectedLevel;
+                                select.addEventListener('change', function () {
+                                    hls.currentLevel = parseInt(this.value);
                                 });
 
                                 qualitySelectContainer.appendChild(select);
@@ -95,6 +91,8 @@
                 </script>
             @endforeach
         </div>
+
+        {{-- Like Button Script --}}
         <script>
             function toggleLike(videoId) {
                 fetch(`/toggle-like/${videoId}`, {
@@ -125,10 +123,8 @@
                 });
             }
         </script>
-        
-        
     </div>
 
-    {{-- Include HLS.js once --}}
+    {{-- Include HLS.js --}}
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </x-user.layouts>

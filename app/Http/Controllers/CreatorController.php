@@ -11,10 +11,15 @@ class CreatorController extends Controller
 {
     //
     public function creatordash()
-    {
-        return view('creatorview.dashboard');
-    }
+    { $creatorId = auth()->id();
 
+        $videos = Video::withCount('likes')
+            ->where('uploader_id', $creatorId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
+        return view('creatorview.dashboard', compact('videos'));
+    }
     public function upload()
     {
         return view('creatorview.upload');

@@ -56,10 +56,14 @@ Route::middleware([CreatorMiddleware::class])->group(function () {
     Route::get('/creator/upload', [CreatorController::class, 'upload'])->name('upload');
     Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('creator.videos.store');
     Route::get('/creator/videos', [CreatorController::class, 'myvideos'])->name('creator.myvideos');
+ //   Route::get('/creator/myvideos', [CreatorController::class, 'myUploadedVideos'])->name('creator.myUploadedVideos');
 
 });
 
 
 
 Route::post('/toggle-like/{video}', [LikeController::class, 'toggle'])->name('like.video');
-Route::get('/trending', [LikeController::class, 'likedVideos'])->name('liked.videos');
+Route::get('/liked', [LikeController::class, 'likedVideos'])->name('liked.videos');
+
+
+

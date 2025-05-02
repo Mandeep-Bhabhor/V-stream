@@ -134,9 +134,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/trending">Trending</a></li>
-            <li class="nav-item"><a class="nav-link" href="/categories">Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="/mylist">My List</a></li>
+            <li class="nav-item"><a class="nav-link" href="/liked">liked</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="/categories">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="/mylist">My List</a></li> --}}
           </ul>
 
           <!-- Search -->
