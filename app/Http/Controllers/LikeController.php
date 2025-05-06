@@ -38,11 +38,16 @@ class LikeController extends Controller
 
 
     public function likedVideos()
-{
-    $likedVideoIds = auth()->user()->like()->pluck('video_id');
-
-    $likedVideos = Video::whereIn('id', $likedVideoIds)->get();
-
-    return view('trending', compact('likedVideos'));
-}
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to view liked videos.');
+        }
+    
+        $likedVideoIds = auth()->user()->like()->pluck('video_id');
+    
+        $likedVideos = Video::whereIn('id', $likedVideoIds)->get();
+    
+        return view('trending', compact('likedVideos'));
+    }
+    
 }

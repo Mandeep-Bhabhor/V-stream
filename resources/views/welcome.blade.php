@@ -34,12 +34,18 @@
                                 <form id="like-form-{{ $video->id }}" action="{{ route('like.video', $video->id) }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-
+                                @auth
                                 <button onclick="toggleLike({{ $video->id }})"
                                     id="like-button-{{ $video->id }}"
                                     class="btn btn-sm btn-outline-primary rounded-pill">
                                     👍 Like
                                 </button>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary rounded-pill">
+                                    👍 Like
+                                </a>
+                            @endauth
+                            
                             </div>
                         </div>
                     </div>
