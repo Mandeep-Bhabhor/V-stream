@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    <h1 class="text-center my-4">Welcome to the Laravel Application</h1>
+    <h1 class="text-center my-4">Welcome to the V-Stream</h1>
 
     <div class="container">
         <h2 class="mb-4 text-primary">Uploaded Videos</h2>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">{{ $filename }}</h5>
+                            <h5 class="card-title">{{ $video->title }}</h5>
                             <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>
 

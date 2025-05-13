@@ -15,10 +15,13 @@ class UserController extends Controller
 
     public function home()
     {
-        //$videoFiles = File::files(public_path('uploads/video'));
-        $videos = Video::with('uploader')->get();
+        $videos = Video::with('uploader')
+                       ->where('status', 'encoded') // adjust if your column is named differently
+                       ->get();
+    
         return view('welcome', compact('videos'));
     }
+    
     public function login(Request $request)
     {
         // Handle the login logic here

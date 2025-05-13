@@ -60,13 +60,16 @@ class CreatorController extends Controller
         
        
         echo $details['label'];
+
+        $durationInSeconds = 60.03; // your actual duration value
+        $duration = gmdate("H:i:s", (int)$durationInSeconds);
        Video::create([
             'title' => $validated['title'],
             'video'=> $path ? $path . $filename : null,
             'resolution' => $details['label'],
             'uploader_id' => Auth::id(), // Assuming the user is logged in
             'description' => $validated['description'],
-            'duration' => $details['duration'],
+            'duration' => $duration,
         ]);
     
         // All good, save or process further...
@@ -110,11 +113,15 @@ class CreatorController extends Controller
     return null;
 }
 
-    public function myvideos()
-    {
-        $videos = Video::where('uploader_id', Auth::id())->get();
-        return view('creatorview.myvideos', compact('videos'));
-    }
+public function myvideos()
+{
+    $videos = Video::where('uploader_id', Auth::id())
+                   ->where('status', 'encoded')
+                   ->get();
+
+    return view('creatorview.myvideos', compact('videos'));
+}
+
     
     public function delete($id)
 {

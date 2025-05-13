@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -85,5 +87,14 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Video encoded successfully.');
     }
     
+    public function userStats()
+{
+    $totalUsers = User::count();
+    $creators = User::where('usertype', 'creator')->count();
+    $viewers = User::where('usertype', 'viewer')->count();
+
+    return view('adminview.users', compact('totalUsers', 'creators', 'viewers'));
+}
+
     
 }

@@ -38,4 +38,16 @@
         <button type="submit" class="btn btn-success">Upload Video</button>
     </form>
 </div>
+<script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const fileInput = document.getElementById('video');
+        const file = fileInput.files[0];
+
+        if (file && file.size > 50 * 1024 * 1024) { // 50 MB in bytes
+            e.preventDefault();
+            alert('The video file must be less than 50MB.');
+        }
+    });
+</script>
+
 </x-creator.layout>

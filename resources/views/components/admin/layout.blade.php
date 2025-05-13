@@ -123,12 +123,12 @@
         <div class="collapse navbar-collapse" id="adminNavbar">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="/adminview/dashboard">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin/users">Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/user-stats">Users</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/videos">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/encode">Encode</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin/categories">Categories</a></li>
+            {{-- <li class="nav-item"><a class="nav-link" href="/admin/categories">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="/admin/reports">Reports</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin/settings">Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/settings">Settings</a></li> --}}
           </ul>
 
           <div class="dropdown ms-3">

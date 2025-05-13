@@ -49,6 +49,8 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin/encode', [AdminController::class, 'encode'])->name('admin.encodeview');
     Route::get('/adminview/dashboard', [AdminController::class, 'admindash'])->name('admindash');
     Route::post('/admin/video/{id}/encode', [AdminController::class, 'encodevideo'])->name('admin.encode');
+    Route::get('/admin/user-stats', [AdminController::class, 'userStats'])->name('admin.userstats');
+
 });
 
 Route::middleware([CreatorMiddleware::class])->group(function () {
