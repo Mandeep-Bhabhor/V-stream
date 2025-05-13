@@ -26,5 +26,11 @@ class User extends Authenticatable
     return $this->hasMany(\App\Models\Like::class);
 }
 
+
+
+    public function audit()
+{
+    return $this->hasMany(\App\Models\Audit::class);
+}
     // Add your other properties and methods here
 }

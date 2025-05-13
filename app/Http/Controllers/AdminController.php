@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Audit;
 
 class AdminController extends Controller
 {
@@ -96,5 +97,23 @@ class AdminController extends Controller
     return view('adminview.users', compact('totalUsers', 'creators', 'viewers'));
 }
 
-    
+    public function audit()
+{
+    $audits = Audit::with('user')->latest()->get(); // eager load user info
+    return view('adminview.audit', compact('audits'));
+}
+   
+
+public function showCreatorVideos()
+{
+    $videos = \App\Models\Video::with(['uploader', 'likes'])
+                ->whereHas('uploader', function ($query) {
+                    $query->where('usertype', 'creator');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+    return view('adminview.videos', compact('videos'));
+}
+
 }

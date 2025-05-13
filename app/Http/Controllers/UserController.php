@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Audit;
 //use App\Http\Controllers\File;
 use Illuminate\Support\Facades\File;
 
@@ -101,15 +102,12 @@ class UserController extends Controller
              Auth::login($user);
      
              $uid = Auth::id();
-     
-             // Insert login details into the Audit table
-            //  DB::table('Audits')->insert([
-            //      'user_id'    => $uid,
-            //      'usertype'   => $user->usertype,
-            //      'logindate'  => now()->toDateString(),
-            //      'logintime'  => now()->toTimeString(),
-            //      'logouttime' => null
-            //  ]);
+             $d = 'null';
+            // Insert login details into the Audit table
+            Audit::create([
+                 'user_id'    => $uid,  
+                 'logouttime' => $d,
+             ]);
      
              // Redirect based on user type
              if ($user->usertype === 'viewer') {  
@@ -133,11 +131,13 @@ class UserController extends Controller
       if (Auth::check()) {
           $user = Auth::user(); // Get the authenticated user
           
-          // Update logout time in the Audit table
-          // DB::table('Audits')
-          // ->where('user_id', Auth::id()) // Check for the authenticated user's ID
-          // ->whereNull('logouttime')      // Update only the last log entry with null logout time
-          // ->update(['logouttime' => now()->toTimeString()]);
+         // Update logout time in the Audit table
+            Audit::where('user_id', $user->id) // Get the user's ID
+          ->whereNull('logout_time')      // Update only the last log entry with null logout time
+          ->update([
+        'logout_time' => now(), // ✅ Full datetime
+       // 'updated_at' => now(),
+    ]);
       
   
           // Log out the user and clear session

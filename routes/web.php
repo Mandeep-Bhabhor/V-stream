@@ -50,10 +50,12 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/adminview/dashboard', [AdminController::class, 'admindash'])->name('admindash');
     Route::post('/admin/video/{id}/encode', [AdminController::class, 'encodevideo'])->name('admin.encode');
     Route::get('/admin/user-stats', [AdminController::class, 'userStats'])->name('admin.userstats');
+    Route::get('/admin/audit', [AdminController::class, 'audit'])->name('admin.audit');
+    Route::get('/admin/videos', [AdminController::class, 'showCreatorVideos'])->name('admin.creator.videos');
 
 });
 
-Route::middleware([CreatorMiddleware::class])->group(function () {
+Route::middleware([CreatorMiddleware::class])->group(function () {  
     Route::get('/creatorview/dashboard', [CreatorController::class, 'creatordash'])->name('creatordash');
     Route::get('/creator/upload', [CreatorController::class, 'upload'])->name('upload');
     Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('creator.videos.store');
