@@ -152,4 +152,79 @@ class UserController extends Controller
       return redirect('/login');
   }
      
+
+    public function profile()
+    {
+        $user = Auth::user(); // Get the authenticated user
+        return view('userview.userprofile', compact('user'));
+    }
+
+    
+     public function vieweditprofile()
+     {
+        if(Auth::check()){
+            $user = Auth::user();
+            
+          //  $user = User::findorfail($id);
+            return view('userview.updateuser', data: compact('user'));
+         }
+         else{
+            return redirect('/login');
+                 } 
+     }
+
+          public function editprofile(Request $request, int $id)
+     {
+         if (Auth::check()) {
+             $user = Auth::user();
+     
+             // Validate inputs
+             $request->validate([
+                 'name' => 'required|min:3|max:255|string',
+                 'email' => 'required|email',
+                //   'email'    => 'required|email|unique:users,email',
+                 'password' => 'required|string|min:8',
+             ]);
+     
+             // Find the user by ID
+             $user = User::findOrFail($id);
+     
+             // Check if the name or email needs to be updated
+             if ($request->has('name') && $request->input('name') != $user->name) {
+                 $oldName = $user->name; // Store the old username
+                 $user->name = $request->input('name');
+             }
+     
+             if ($request->has('email') && $request->input('email') != $user->email) {
+                 $user->email = $request->input('email');
+             }
+             if ($request->has('password') && $request->input('password') != $user->password) {
+                $user->password = $request->input('password');
+            }
+             // Save the updated user
+             $user->save();
+     
+          
+             return redirect('/profile')->with('status', 'Your profile has been successfully updated.');
+         } else {
+             return redirect('/login');
+         }
+     }
+     
+     public function deleteprofile(int $id)
+     {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        //return redirect()->back()->with('status',value: 'product deleted');
+        return redirect('/')->with('status', 'User deleted');
+     }
+      
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $videos = Video::where('title', 'LIKE', '%' . $query . '%')->get();
+
+    return view('userview.search', compact('videos', 'query'));
+}
 }

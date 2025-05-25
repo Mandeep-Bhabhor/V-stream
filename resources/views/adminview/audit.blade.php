@@ -17,8 +17,10 @@
                     @forelse ($audits as $index => $audit)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $audit->user->name }}</td>
-                            <td>{{ $audit->user->usertype }}</td>
+                            <td>{{ $audit->user->name ?? 'Deleted User' }}</td>
+                                <td>{{ $audit->user->usertype ?? 'N/A' }}</td>
+
+                           
                            <td>{{ $audit->created_at }}</td>
 
                             <td>{{ $audit->logout_time }}</td>

@@ -52,6 +52,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
    // Route::get('/admin/user-stats', [AdminController::class, 'userStats'])->name('admin.userstats');
     Route::get('/admin/audit', [AdminController::class, 'audit'])->name('admin.audit');
     Route::get('/admin/videos', [AdminController::class, 'showCreatorVideos'])->name('admin.creator.videos');
+    Route::get('/admin/profile', [UserController::class, 'profile']);
 
 });
 
@@ -61,6 +62,7 @@ Route::middleware([CreatorMiddleware::class])->group(function () {
     Route::post('/uploadvideo', [CreatorController::class, 'uploadvideo'])->name('creator.videos.store');
     Route::get('/creator/videos', [CreatorController::class, 'myvideos'])->name('creator.myvideos');
  //   Route::get('/creator/myvideos', [CreatorController::class, 'myUploadedVideos'])->name('creator.myUploadedVideos');
+    Route::get('/creator/profile', [UserController::class, 'profile']);
 
 });
 
@@ -70,4 +72,8 @@ Route::post('/toggle-like/{video}', [LikeController::class, 'toggle'])->name('li
 Route::get('/liked', [LikeController::class, 'likedVideos'])->name('liked.videos');
 
 
-
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::get('/editprofile/{id}', [UserController::class, 'vieweditprofile']);
+Route::put('/editprofile/{id}', [UserController::class, 'editprofile']);    
+Route::get('/deleteprofile/{id}', [UserController::class, 'deleteprofile']);
+Route::get('/search', [UserController::class, 'search'])->name('search');
