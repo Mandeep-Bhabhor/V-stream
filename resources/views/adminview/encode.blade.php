@@ -1,6 +1,6 @@
 <x-admin.layout>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">All Videos</h1>
+        <h1 class="text-center mb-4 custom-h-heading">encode Videos</h1>
 
         {{-- Loading Spinner --}}
         <div id="loadingSpinner" style="display:none;" class="text-center mb-3">

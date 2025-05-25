@@ -14,7 +14,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card shadow-lg">
-                        <div class="card-header bg-success text-white text-center">
+                        <div class="card-header bg-danger text-white text-center">
                             <h2 class="mb-0">Welcome to the Login Page</h2>
                         </div>
                         <div class="card-body p-4">
@@ -40,7 +40,7 @@
                                     <small class="text-danger">@error('password'){{ $message }}@enderror</small>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-outline-success btn-block">Login</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-block">Login</button>
                                 </div>
                             </form>
                         </div>

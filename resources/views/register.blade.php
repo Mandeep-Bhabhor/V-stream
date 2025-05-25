@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <!-- Card Container -->
         <div class="card shadow mx-auto" style="max-width: 500px;">
-            <div class="card-header bg-success text-white text-center">
+            <div class="card-header bg-danger text-white text-center">
                 <h2>Register</h2>
             </div>
             <div class="card-body">
@@ -93,7 +93,7 @@
 
                     <!-- Submit Button -->
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-outline-success btn-lg">
+                        <button type="submit" class="btn btn-outline-danger btn-lg">
                             <i class="bi bi-person-plus me-2"></i>Register
                         </button>
                     </div>

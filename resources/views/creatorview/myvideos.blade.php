@@ -1,5 +1,4 @@
 <x-creator.layout>
-    <h1 class="text-center my-4">Welcome to the Laravel Application</h1>
 
     <div class="container">
         <h2 class="mb-4 text-primary">Uploaded Videos</h2>
@@ -12,13 +11,13 @@
                 @endphp
 
                 <div class="col">
-                    <div class="card h-100 shadow-sm rounded-4 border-0">
+                    <div class="card h-100 shadow-sm rounded-4 border-0" style="background-color: #000000; color: #ffffff;">
                         <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
                             <video id="video-{{ $video->id }}" controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></video>
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">{{ $filename }}</h5>
+                            <h5 class="card-title">{{ $video->title }}</h5>
                             <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                             <a href="{{ url($video->id . '/deletevideo') }}" class="btn btn-sm btn-danger">Delete</a>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>

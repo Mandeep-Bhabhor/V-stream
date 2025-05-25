@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <h1 class="text-center my-4">Liked Videos</h1>
+    <h1 class="text-center my-4 custom-welcome-heading">Liked Videos</h1>
 
     <div class="container">
         @if ($likedVideos->isEmpty())
@@ -20,7 +20,7 @@
                     @endphp
 
                     <div class="col">
-                        <div class="card h-100 shadow-sm rounded-4 border-0">
+                        <div class="card h-100 shadow-sm rounded-4 border-0"style="background-color: #1a1a1a; color: #ffffff;">
                             <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
                                 <video id="liked-video-{{ $video->id }}" controls
                                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></video>

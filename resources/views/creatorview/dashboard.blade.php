@@ -1,16 +1,17 @@
-<x-creator.layout>
-    
-        <div class="container mt-4">
-            <h3>My Uploaded Videos</h3>
-            <table class="table table-bordered mt-3">
-                <thead>
+ <x-creator.layout>
+    <div class="container mt-4">
+        <h3 class="text-light mb-4 "><i class="bi bi-collection-play-fill me-2 text-success"></i>My Uploaded Videos</h3>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-dark table-borderless rounded shadow-sm overflow-hidden">
+                <thead class="table-danger text-center">
                     <tr>
-                        <th>Title</th>
-                        <th>Uploaded Date</th>
-                        <th>Total Likes</th>
+                        <th scope="col"><i class="bi bi-film"></i> Title</th>
+                        <th scope="col"><i class="bi bi-calendar-date"></i> Uploaded Date</th>
+                        <th scope="col"><i class="bi bi-hand-thumbs-up"></i> Total Likes</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-light text-center align-middle">
                     @forelse ($videos as $video)
                         <tr>
                             <td>{{ $video->title }}</td>
@@ -19,12 +20,11 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3">No videos uploaded yet.</td>
+                            <td colspan="3" class="text-muted">No videos uploaded yet.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
- 
-    
+    </div>
 </x-creator.layout>

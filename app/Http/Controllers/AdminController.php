@@ -12,7 +12,13 @@ class AdminController extends Controller
 {
     public function admindash()
     {
-        return view('adminview.dashboard');
+        
+    $totalUsers = User::count();
+    $creators = User::where('usertype', 'creator')->count();
+    $viewers = User::where('usertype', 'viewer')->count();
+
+    return view('adminview.dashboard', compact('totalUsers', 'creators', 'viewers'));
+      
     }
 
     public function encode()
@@ -88,14 +94,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Video encoded successfully.');
     }
     
-    public function userStats()
-{
-    $totalUsers = User::count();
-    $creators = User::where('usertype', 'creator')->count();
-    $viewers = User::where('usertype', 'viewer')->count();
-
-    return view('adminview.users', compact('totalUsers', 'creators', 'viewers'));
-}
+ 
 
     public function audit()
 {

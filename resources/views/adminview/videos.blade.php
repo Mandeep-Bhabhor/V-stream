@@ -1,6 +1,6 @@
 <x-admin.layout>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center">All Creator Videos</h2>
+        <h2 class="mb-4 text-center custom-h-heading">All Creator Videos</h2>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped align-middle">

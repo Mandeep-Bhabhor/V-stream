@@ -5,10 +5,13 @@
         </div>
     @endif
 
-    <h1 class="text-center my-4">Welcome to the V-Stream</h1>
+
+
+    <h1 class="text-center my-4 custom-welcome-heading">Welcome to the V-Stream</h1>
+
 
     <div class="container">
-        <h2 class="mb-4 text-primary">Uploaded Videos</h2>
+        <h2 class="mb-4 text-white">Videos</h2>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach ($videos as $video)
@@ -18,42 +21,43 @@
                 @endphp
 
                 <div class="col">
-                    <div class="card h-100 shadow-sm rounded-4 border-0">
+                    <div class="card h-100 shadow-sm rounded-4 border-0"style="background-color: #1a1a1a; color: #ffffff;">
                         <div
                             style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
                             <video id="video-{{ $video->id }}" controls
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></video>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body" style="background-color: #1a1a1a; color: #ffffff;">
                             <h5 class="card-title">{{ $video->title }}</h5>
                             <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>
 
                             <div class="flex items-center gap-2 mt-4">
-                                <form id="like-form-{{ $video->id }}" action="{{ route('like.video', $video->id) }}" method="POST" style="display: none;">
+                                <form id="like-form-{{ $video->id }}" action="{{ route('like.video', $video->id) }}"
+                                    method="POST" style="display: none;">
                                     @csrf
                                 </form>
+
                                 @auth
-                                <button onclick="toggleLike({{ $video->id }})"
-                                    id="like-button-{{ $video->id }}"
-                                    class="btn btn-sm btn-outline-primary rounded-pill">
-                                    👍 Like
-                                </button>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary rounded-pill">
-                                    👍 Like
-                                </a>
-                            @endauth
-                            
+                                    <button onclick="toggleLike({{ $video->id }})" id="like-button-{{ $video->id }}"
+                                        class="btn btn-sm btn-outline-primary rounded-pill">
+                                        👍 Like
+                                    </button>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary rounded-pill">
+                                        👍 Like
+                                    </a>
+                                @endauth
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 {{-- Per-video Script --}}
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         var video = document.getElementById('video-{{ $video->id }}');
                         var videoSrc = "{{ $hlsPath }}";
                         var qualitySelectContainer = document.getElementById('quality-select-{{ $video->id }}');
@@ -63,7 +67,7 @@
                             hls.loadSource(videoSrc);
                             hls.attachMedia(video);
 
-                            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            hls.on(Hls.Events.MANIFEST_PARSED, function() {
                                 var qualities = hls.levels.map((level, index) => ({
                                     label: level.height + 'p',
                                     index: index
@@ -84,7 +88,7 @@
                                     select.appendChild(option);
                                 });
 
-                                select.addEventListener('change', function () {
+                                select.addEventListener('change', function() {
                                     hls.currentLevel = parseInt(this.value);
                                 });
 
@@ -102,31 +106,31 @@
         <script>
             function toggleLike(videoId) {
                 fetch(`/toggle-like/${videoId}`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const btn = document.getElementById('like-button-' + videoId);
-                    if (data.liked) {
-                        btn.classList.remove('btn-outline-primary');
-                        btn.classList.add('btn-primary');
-                        btn.innerHTML = '👍 Liked';
-                    } else {
-                        btn.classList.remove('btn-primary');
-                        btn.classList.add('btn-outline-primary');
-                        btn.innerHTML = '👍 Like';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('You must login first to like.');
-                    window.location.href = '/login';
-                });
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const btn = document.getElementById('like-button-' + videoId);
+                        if (data.liked) {
+                            btn.classList.remove('btn-outline-primary');
+                            btn.classList.add('btn-primary');
+                            btn.innerHTML = '👍 Liked';
+                        } else {
+                            btn.classList.remove('btn-primary');
+                            btn.classList.add('btn-outline-primary');
+                            btn.innerHTML = '👍 Like';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('You must login first to like.');
+                        window.location.href = '/login';
+                    });
             }
         </script>
     </div>
