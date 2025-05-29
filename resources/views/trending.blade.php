@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">{{ $filename }}</h5>
+                                <h5 class="card-title">{{ $video->title }}</h5>
                                 <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
                                 <div id="liked-quality-select-{{ $video->id }}" class="mt-2"></div>
                             </div>

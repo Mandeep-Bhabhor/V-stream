@@ -21,7 +21,8 @@
                 @endphp
 
                 <div class="col">
-                    <div class="card h-100 shadow-sm rounded-4 border-0"style="background-color: #1a1a1a; color: #ffffff;">
+                    <div
+                        class="card h-100 shadow-sm rounded-4 border-0"style="background-color: #1a1a1a; color: #ffffff;">
                         <div
                             style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
                             <video id="video-{{ $video->id }}" controls
@@ -30,7 +31,9 @@
 
                         <div class="card-body" style="background-color: #1a1a1a; color: #ffffff;">
                             <h5 class="card-title">{{ $video->title }}</h5>
-                            <p class="card-text text-muted">Uploaded by: {{ $video->uploader->name }}</p>
+                            <p class="card-text text-muted">
+                                Uploaded by: {{ $video->uploader ? $video->uploader->name : 'Unknown User' }}
+                            </p>
                             <div id="quality-select-{{ $video->id }}" class="mt-2"></div>
 
                             <div class="flex items-center gap-2 mt-4">

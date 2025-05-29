@@ -171,7 +171,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
         {{-- <a class="navbar-brand" href="/admin/dashboard">Admin Panel</a> --}}
-         <a class="navbar-brand diagonal-text" href="/admin/dashboard">V-Stream|Admin Panel</a>
+         <a class="navbar-brand diagonal-text" href="/adminview/dashboard">V-Stream-Admin Panel</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
